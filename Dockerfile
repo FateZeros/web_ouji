@@ -17,3 +17,4 @@ COPY . /web_ouji
 
 # 执行构建命令并将代码构建在 /web_ouji/dist 目录
 RUN npm run build
+

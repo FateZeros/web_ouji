@@ -1,0 +1,36 @@
+version: 3
+stages:
+- 测试阶段
+- 构建阶段
+- 发布阶段
+默认构建任务:
+  label: release-image
+  stage: 构建阶段
+  job_type: lite_image_build
+  only:
+    branches:
+    - .*
+    tags:
+    - .*
+  compile:
+    build_dir: /
+    cache: true
+    dockerfile_path: /Dockerfile
+  extract:
+    - /web_ouji/dist
+  package:
+    build_dir: /
+    cache: true
+    dockerfile_path: /Dockerfile.sec
+默认测试任务:
+  label: develop
+  stage: 测试阶段
+  job_type: test
+  only:
+    branches:
+    - .*
+    tags:
+    - .*
+  image: ubuntu:16.04
+  script:
+  - echo This is a default test.
