@@ -4,7 +4,7 @@
             <div class="img-block">
                 <div class="img-404"></div>
             </div>
-            <div class="content">
+            <div class="exception-content">
                 <h1>404</h1>
                 <div class="desc">抱歉，你访问的页面不存在</div>
                 <el-button type="primary" @click="backHome()">返回首页</el-button>
@@ -51,7 +51,7 @@ export default {
     background-size: contain;
   }
 
-  .content {
+  .exception-content {
       flex: 1;
   }
 

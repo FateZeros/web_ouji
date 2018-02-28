@@ -21,7 +21,7 @@ import demoUser from '@/assets/demoUser.jpg'
 export default {
   data () {
     let userInfo = localStorage.getItem('OUJI_INFO') || '{}'
-    console.log(userInfo)
+    // console.log(userInfo)
     if (userInfo) {
       userInfo = JSON.parse(userInfo)
     }

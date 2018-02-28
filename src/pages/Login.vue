@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { Login } from '@/api'
 
 export default {
   data () {
@@ -57,28 +58,21 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit', this.loginForm.userName, this.loginForm.password)
-        //   const LoginData = { username: this.loginForm.userName, password: this.loginForm.password }
-        //   Login(LoginData).then(({ records: { username, userImg, userRole, token } }) => {
-        //     // 登录成功 用户信息
-        //     const loginUser = {
-        //       username,
-        //       userImg: 'http://192.168.1.54:6633' + userImg,
-        //       userRole,
-        //       token
-        //     }
-        //     localStorage.setItem('MEETING_INFO', JSON.stringify(loginUser))
-        //     this.$router.push({ path: '/home' })
-        //   }).catch(({ code, msg }) => {
-        //     if (code === -1) {
-        //       this.$message({
-        //         message: msg,
-        //         type: 'error',
-        //         duration: 2000
-        //       })
-        //     } else {
-        //       this.inputErr = msg
-        //     }
-        //   })
+          const LoginData = { username: this.loginForm.userName, password: this.loginForm.password }
+          Login(LoginData).then(() => {
+            // 登录成功 用户信息
+            const loginUser = {
+              username: this.loginForm.userName
+            }
+            localStorage.setItem('OUJI_INFO', JSON.stringify(loginUser))
+            this.$router.push({ path: '/nnc1' })
+          }).catch(({ code, msg }) => {
+            this.$message({
+                message: msg,
+                type: 'error',
+                duration: 2000
+            })
+          })
         } else {
           return false
         }

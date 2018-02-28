@@ -16,13 +16,12 @@ router.beforeEach((to, from, next) => {
   const userInfo = localStorage.getItem('OUJI_INFO')
   if (!userInfo) {
     // 无登录信息
-    console.log(userInfo)
-    // if (to.path !== '/login' && to.path !== '/register') {
-    //   next('/login')
-    // } else {
-    //   next()
-    // }
-    next()
+    if (to.path !== '/login') {
+        next('/login')
+    } else {
+        next()
+    }
+    // next()
   } else {
     next()
   }
