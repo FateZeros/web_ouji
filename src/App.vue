@@ -6,14 +6,8 @@
 </template>
 
 <script>
-// import MyCanvas from './components/MyCanvas.vue'
-
 export default {
-  name: 'App',
-
-  // components: {
-  //   MyCanvas
-  // }
+  name: 'App'
 }
 </script>
 
