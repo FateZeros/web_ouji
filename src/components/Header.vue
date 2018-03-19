@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-	    <div class="logo">aa</div>
+	    <div class="logo">鸥记商务</div>
     <div class="user-info">
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -54,6 +54,8 @@ export default {
 
 .logo {
   float: left;
+  color: #fff;
+  margin-left: 45px;
 }
 
 .user-info {

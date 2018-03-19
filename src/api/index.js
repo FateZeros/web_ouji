@@ -8,3 +8,12 @@ export function Login (data) {
     data
   })
 }
+
+// 生成word
+export function ProduceWord (data) {
+  return makeRequest({
+    url: '/api/produceword',
+    method: 'post',
+    data
+  })
+}

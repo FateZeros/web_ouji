@@ -5,6 +5,8 @@ import Login from '@/pages/Login.vue'
 import Home from '@/pages/Home.vue'
 import NNC1 from '@/pages/Nnc1.vue'
 import ND2A from '@/pages/Nd2a.vue'
+// 改股改董
+import GGGD from '@/pages/Gggd.vue'
 
 import Page404 from '@/components/404.vue'
 
@@ -28,6 +30,10 @@ export default new Router({
                 {
                     path: '/nd2a',
                     component: ND2A
+                },
+                {
+                    path: '/gggd',
+                    component: GGGD
                 }
             ]
         },

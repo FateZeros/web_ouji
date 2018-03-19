@@ -28,7 +28,10 @@
         title: 'Word文档',
         subs: [{
           index: '/nnc1',
-          title: 'NNC文档',
+          title: 'NNC1文档',
+        }, {
+          index: '/gggd',
+          title: '改股改董'
         }, {
           index: '/nd2a',
           title: 'ND2A文档'
