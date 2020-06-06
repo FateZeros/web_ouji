@@ -101,7 +101,7 @@
                 </el-form-item>
                 <el-form-item label="辭職日期:" prop="czDate">
                     <el-date-picker
-                    type="date" 
+                    type="date"
                     placeholder="选择日期"
                     v-model="form.czDate"
                     style="width: 100%;"
@@ -155,206 +155,164 @@ import defaultInfo from '@/config/defaultInfo'
 import { ProduceWord } from '@/api'
 
 export default {
-    data() {
-        return {
-            active: 0,
-            forthStatus: 'wait',
+  data() {
+    return {
+      active: 0,
+      forthStatus: 'wait',
 
-            form: {
-                cNameEn: '',
-                cNameCn: '',
-                // 转让人信息
-                tNameEn: '',
-                tNameCn: '',
-                tStockNum: '',
-                tAddr: '',
+      form: {
+        cNameEn: '',
+        cNameCn: '',
+        // 转让人信息
+        tNameEn: '',
+        tNameCn: '',
+        tStockNum: '',
+        tAddr: '',
 
-                // 受让人信息
-                tNameEn1: '',
-                tNameCn1: '',
-                tAddr1: '',
+        // 受让人信息
+        tNameEn1: '',
+        tNameCn1: '',
+        tAddr1: '',
 
-                stockT: '',
-                stockPer: '',
+        stockT: '',
+        stockPer: '',
 
-                busiNum: '',
-                cNum: '',
-                czNameCn: '',
-                czNameEn1: '',
-                czNameEn2: '',
+        busiNum: '',
+        cNum: '',
+        czNameCn: '',
+        czNameEn1: '',
+        czNameEn2: '',
 
-                chinaId: '',
-                czDate: '',
+        chinaId: '',
+        czDate: '',
 
-                sUName: defaultInfo.userName,
-                sUAddr: defaultInfo.userAddr,
-                sUPhone: defaultInfo.userPhone,
-                sUFax: defaultInfo.userFax,
-                sUEmail: defaultInfo.userEmail,
-            },
-            rules: {
-                cNameEn: [
-                    { required: true, message: '请输入公司英文名稱' }
-                ],
-                cNameCn: [
-                    { required: true, message: '请输入公司中文名稱' }
-                ],
-                tNameEn: [
-                    { required: true, message: '请输入转让人中文名称' }
-                ],
-                tNameCn: [
-                    { required: true, message: '请输入转让人英文名称' }
-                ],
-                tStockNum: [
-                    { required: true, message: '请输入注册资金' }
-                ],
-                tAddr: [
-                    { required: true, message: '请输入转让人地址' }
-                ],
+        sUName: defaultInfo.userName,
+        sUAddr: defaultInfo.userAddr,
+        sUPhone: defaultInfo.userPhone,
+        sUFax: defaultInfo.userFax,
+        sUEmail: defaultInfo.userEmail
+      },
+      rules: {
+        cNameEn: [{ required: true, message: '请输入公司英文名稱' }],
+        cNameCn: [{ required: true, message: '请输入公司中文名稱' }],
+        tNameEn: [{ required: true, message: '请输入转让人中文名称' }],
+        tNameCn: [{ required: true, message: '请输入转让人英文名称' }],
+        tStockNum: [{ required: true, message: '请输入注册资金' }],
+        tAddr: [{ required: true, message: '请输入转让人地址' }],
 
-                
-                tNameEn1: [
-                    { required: true, message: '请输入受让人英文名称' }
-                ],
-                tNameCn1: [
-                    { required: true, message: '请输入受让人中文名称' }
-                ],
-                tAddr1: [
-                    { required: true, message: '请输入受让人地址' }
-                ],
+        tNameEn1: [{ required: true, message: '请输入受让人英文名称' }],
+        tNameCn1: [{ required: true, message: '请输入受让人中文名称' }],
+        tAddr1: [{ required: true, message: '请输入受让人地址' }],
 
-                stockT: [
-                    { required: true, message: '请输入股份总份数' }
-                ],
-                stockPer: [
-                    { required: true, message: '请输入每股金额' }
-                ],
+        stockT: [{ required: true, message: '请输入股份总份数' }],
+        stockPer: [{ required: true, message: '请输入每股金额' }],
 
+        busiNum: [{ required: true, message: '请输入商業登記證號碼' }],
+        cNum: [{ required: true, message: '请输入公司编号' }],
+        czNameCn: [{ required: true, message: '请输入辭職人中文名' }],
+        czNameEn1: [{ required: true, message: '请输入辭職人英文名' }],
+        czNameEn2: [{ required: true, message: '请输入辭職人英文名' }],
+        chinaId: [{ required: true, message: '请输入chinaId' }],
+        czDate: [{ required: true, message: '请输入辭職日期' }],
 
-                busiNum: [
-                    { required: true, message: '请输入商業登記證號碼' }
-                ],
-                cNum: [
-                    { required: true, message: '请输入公司编号' }
-                ],
-                czNameCn: [
-                    { required: true, message: '请输入辭職人中文名' }
-                ],
-                czNameEn1: [
-                    { required: true, message: '请输入辭職人英文名' }
-                ],
-                czNameEn2: [
-                    { required: true, message: '请输入辭職人英文名' }
-                ],
-                chinaId: [
-                    { required: true, message: '请输入chinaId' }
-                ],
-                czDate: [
-                    { required: true, message: '请输入辭職日期' }
-                ],
+        sUName: [{ required: true, message: '请输入提交人名稱' }],
+        sUAddr: [{ required: true, message: '请输入提交人地址' }],
+        sUPhone: [{ required: true, message: '请输入提交人電話' }],
+        sUFax: [{ required: true, message: '请输入提交人傳真' }],
+        sUEmail: [{ required: true, message: '请输入提交人電郵' }]
+      },
+      submitUser: {
+        userInfo: 'defaultUser'
+      }
+    }
+  },
 
-                sUName: [
-                    { required: true, message: '请输入提交人名稱' }
-                ],
-                sUAddr: [
-                    { required: true, message: '请输入提交人地址' }
-                ],
-                sUPhone: [
-                    { required: true, message: '请输入提交人電話' }
-                ],
-                sUFax: [
-                    { required: true, message: '请输入提交人傳真' }
-                ], 
-                sUEmail: [
-                    { required: true, message: '请输入提交人電郵' }
-                ],
-            },
-            submitUser: {
-                userInfo: 'defaultUser'
-            },
-        }
+  methods: {
+    prePage() {
+      if (this.active > 0) {
+        this.active = this.active - 1
+      }
+      this.forthStatus = 'wait'
     },
 
-    methods: {
-        prePage() {
-            if (this.active > 0) {
-                this.active = this.active - 1
-            }    
-            this.forthStatus = 'wait'
-        },
+    nextPage() {
+      const formObj = {
+        0: 'formPage0',
+        1: 'formPage1',
+        2: 'formPage2',
+        3: 'formPage3'
+      }
 
-        nextPage() {
-            const formObj = {
-                0: 'formPage0',
-                1: 'formPage1',
-                2: 'formPage2',
-                3: 'formPage3'
-            }
-
-            this.$refs[formObj[this.active]].validate(valid => {
-                if (valid) {
-                    if (this.active < 1) {
-                        this.active = this.active + 1
-                    } else {
-                        const params = Object.assign({}, this.form)
-                        const [dateD, dateM, dateY] = params.czDate.split('/')
-                        params.dateY = dateY
-                        params.dateM = dateM
-                        params.dateD = dateD
-                        // console.log(params)   
-                        this.produceWord('GGGD', params)                     
-                    }
-                } else {
-                    return false
-                }
-            })
-        },
-
-        changeSubmitUser(value) {
-            // 切换到自定义提交人
-            if (value == 'selfUser') {
-                this.form = {
-                    ...this.form,
-                    sUName: '',
-                    sUAddr: '',
-                    sUPhone: '',
-                    sUFax: '',
-                    sUEmail: '',
-                }
-            } else {
-                this.form = {
-                    ...this.form,
-                    sUName: defaultInfo.userName,
-                    sUAddr: defaultInfo.userAddr,
-                    sUPhone: defaultInfo.userPhone,
-                    sUFax: defaultInfo.userFax,
-                    sUEmail: defaultInfo.userEmail
-                }
-            }
-        },
-
-        produceWord(wordName, wordParams) {
-            const data = {
-                docxName: wordName,
-                docxParams: wordParams
-            }
-
-            ProduceWord(data).then(() => {
-                this.forthStatus = 'success'
-                const url = `/output/${wordName}`
-                const fileName = `${wordName}.docx`
-                this.$alert(`<a href=${url} download=${fileName}>${fileName}</a>`, 'WORD 下载，点击下载', {
-                    dangerouslyUseHTMLString: true
-                })
-            }).catch(({ code, msg }) => {
-                this.$message({
-                    message: msg,
-                    type: 'error',
-                    duration: 2000
-                })
-            })
+      this.$refs[formObj[this.active]].validate(valid => {
+        if (valid) {
+          if (this.active < 1) {
+            this.active = this.active + 1
+          } else {
+            const params = Object.assign({}, this.form)
+            const [dateD, dateM, dateY] = params.czDate.split('/')
+            params.dateY = dateY
+            params.dateM = dateM
+            params.dateD = dateD
+            // console.log(params)
+            this.produceWord('GGGD', params)
+          }
+        } else {
+          return false
         }
+      })
+    },
+
+    changeSubmitUser(value) {
+      // 切换到自定义提交人
+      if (value == 'selfUser') {
+        this.form = {
+          ...this.form,
+          sUName: '',
+          sUAddr: '',
+          sUPhone: '',
+          sUFax: '',
+          sUEmail: ''
+        }
+      } else {
+        this.form = {
+          ...this.form,
+          sUName: defaultInfo.userName,
+          sUAddr: defaultInfo.userAddr,
+          sUPhone: defaultInfo.userPhone,
+          sUFax: defaultInfo.userFax,
+          sUEmail: defaultInfo.userEmail
+        }
+      }
+    },
+
+    produceWord(wordName, wordParams) {
+      const data = {
+        docxName: wordName,
+        docxParams: wordParams
+      }
+
+      ProduceWord(data)
+        .then(() => {
+          this.forthStatus = 'success'
+          const url = `/output/${wordName}`
+          const fileName = `${wordName}.docx`
+          this.$alert(
+            `<a href=${url} download=${fileName}>${fileName}</a>`,
+            'WORD 下载，点击下载',
+            {
+              dangerouslyUseHTMLString: true
+            }
+          )
+        })
+        .catch(({ code, msg }) => {
+          this.$message({
+            message: msg,
+            type: 'error',
+            duration: 2000
+          })
+        })
     }
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export function makeRequest ({ url, method = 'get', data = {} }) {
+export function makeRequest({ url, method = 'get', data = {} }) {
   return new Promise((resolve, reject) => {
     Vue.http[method](url, data)
       .then(response => {

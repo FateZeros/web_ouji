@@ -241,7 +241,7 @@
             <el-col :span="12">
               <el-form-item label="簽署日期:" prop="fDateSigned">
                 <el-date-picker
-                  type="date" 
+                  type="date"
                   placeholder="选择日期"
                   v-model="form.fDateSigned"
                   style="width: 100%;"
@@ -269,12 +269,12 @@ import { ProduceWord } from '@/api'
 export default {
   data() {
     const validateFunderNameEn = (rule, value, cb) => {
-        const arr = value.split('-')
-        if (arr[0] && arr[1]) {
-          cb()
-        } else {
-          cb(new Error('必须以-隔开'))
-        }
+      const arr = value.split('-')
+      if (arr[0] && arr[1]) {
+        cb()
+      } else {
+        cb(new Error('必须以-隔开'))
+      }
     }
 
     return {
@@ -350,126 +350,64 @@ export default {
         userInfo: 'defaultUser'
       },
       rules: {
-        cNameEn: [
-          { required: true, message: '请输入公司英文名稱' }
-        ],
-        cNameCn: [
-          { required: true, message: '请输入公司中文名稱' }
-        ],
-        cRAddr: [
-          { required: true, message: '请输入註冊辦事處地址' }
-        ],
-        sUName: [
-          { required: true, message: '请输入提交人名稱' }
-        ],
-        sUAddr: [
-          { required: true, message: '请输入提交人地址' }
-        ],
-        sUPhone: [
-          { required: true, message: '请输入提交人電話' }
-        ],
-        sUFax: [
-          { required: true, message: '请输入提交人傳真' }
-        ], 
-        sUEmail: [
-          { required: true, message: '请输入提交人電郵' }
-        ],
+        cNameEn: [{ required: true, message: '请输入公司英文名稱' }],
+        cNameCn: [{ required: true, message: '请输入公司中文名稱' }],
+        cRAddr: [{ required: true, message: '请输入註冊辦事處地址' }],
+        sUName: [{ required: true, message: '请输入提交人名稱' }],
+        sUAddr: [{ required: true, message: '请输入提交人地址' }],
+        sUPhone: [{ required: true, message: '请输入提交人電話' }],
+        sUFax: [{ required: true, message: '请输入提交人傳真' }],
+        sUEmail: [{ required: true, message: '请输入提交人電郵' }],
 
-        cSType: [
-          { required: true, message: '请输入股份的類別' }
-        ],
-        cSCurrency: [
-          { required: true, message: '请输入貨幣' }
-        ],
-        cSTotal: [
-          { required: true, message: '请输入建議發行的股份總數' }
-        ],
-        fNameCn: [
-          { required: true, message: '请输入中文姓名' }
-        ],
+        cSType: [{ required: true, message: '请输入股份的類別' }],
+        cSCurrency: [{ required: true, message: '请输入貨幣' }],
+        cSTotal: [{ required: true, message: '请输入建議發行的股份總數' }],
+        fNameCn: [{ required: true, message: '请输入中文姓名' }],
         fNameEn: [
           { required: true, message: '请输入英文姓名' },
           { validator: validateFunderNameEn }
         ],
-        fAddr: [
-          { required: true, message: '请输入地址' }
-        ],
-        fCountry: [
-          { required: true, message: '请输入國家／地區' }
-        ],
-        fStockNum: [
-          { required: true, message: '请输入占股份的数目' }
-        ],
+        fAddr: [{ required: true, message: '请输入地址' }],
+        fCountry: [{ required: true, message: '请输入國家／地區' }],
+        fStockNum: [{ required: true, message: '请输入占股份的数目' }],
 
-        fNameCn1: [
-          { required: true, message: '请输入中文姓名' }
-        ],
-        fNameEn1: [
-          { required: true, message: '请输入英文姓名' }
-        ],
-        fAddr1: [
-          { required: true, message: '请输入地址' }
-        ],
-        fCountry1: [
-          { required: true, message: '请输入國家／地區' }
-        ],
-        fStockNum1: [
-          { required: true, message: '请输入占股份的数目' }
-        ],
+        fNameCn1: [{ required: true, message: '请输入中文姓名' }],
+        fNameEn1: [{ required: true, message: '请输入英文姓名' }],
+        fAddr1: [{ required: true, message: '请输入地址' }],
+        fCountry1: [{ required: true, message: '请输入國家／地區' }],
+        fStockNum1: [{ required: true, message: '请输入占股份的数目' }],
 
-        cNumber: [
-          { required: true, message: '请输入公司編號' }
-        ],
+        cNumber: [{ required: true, message: '请输入公司編號' }],
         // companyEmail: [
         //   { required: true, message: '请输入公司邮件' }
         // ],
-        sNameCn: [
-          { required: true, message: '公司中文名稱' }
-        ],
-        sNameEn: [
-          { required: true, message: '公司英文名稱' }
-        ],
-        sHKAddr: [
-          { required: true, message: '香港地址' }
-        ],
+        sNameCn: [{ required: true, message: '公司中文名稱' }],
+        sNameEn: [{ required: true, message: '公司英文名稱' }],
+        sHKAddr: [{ required: true, message: '香港地址' }],
 
-        chNameCn: [
-          { required: true, message: '请输入董事姓名' }
-        ],
-        chSureName: [
-          { required: true, message: '请输入英文姓式' }
-        ],
-        chOtherName: [
-          { required: true, message: '请输入英文名字' }
-        ],
-        chCountry: [
-          { required: true, message: '请输入國家／地區' }
-        ],
-        chAddr: [
-          { required: true, message: '请输入联络地址或证件地址' }
-        ],
+        chNameCn: [{ required: true, message: '请输入董事姓名' }],
+        chSureName: [{ required: true, message: '请输入英文姓式' }],
+        chOtherName: [{ required: true, message: '请输入英文名字' }],
+        chCountry: [{ required: true, message: '请输入國家／地區' }],
+        chAddr: [{ required: true, message: '请输入联络地址或证件地址' }],
         chChinaId: [
-          { required: true, message: '请输入中国大陆的身份证号码' },
+          { required: true, message: '请输入中国大陆的身份证号码' }
           // { validator: validateRequire }
         ],
         chHKId: [
-          { required: true, message: '请输入香港身份证号码' },
+          { required: true, message: '请输入香港身份证号码' }
           // { validator: validateRequire }
         ],
         psCountry: [
-          { required: true, message: '请输入護照簽發國家' },
+          { required: true, message: '请输入護照簽發國家' }
           // { validator: validateRequire }
         ],
         psNumber: [
-          { required: true, message: '请输入護照號碼' },
+          { required: true, message: '请输入護照號碼' }
           // { validator: validateRequire }
         ],
-        fNameSigned: [
-          { required: true, message: '请输入姓名簽署' }
-        ],
-        fDateSigned: [
-          { required: true, message: '请输入选择日期' }
-        ]
+        fNameSigned: [{ required: true, message: '请输入姓名簽署' }],
+        fDateSigned: [{ required: true, message: '请输入选择日期' }]
       }
     }
   },
@@ -479,7 +417,7 @@ export default {
       if (value == 'cn') {
         this.form = {
           ...this.form,
-          cRAddr: defaultInfo.workAddrCn, 
+          cRAddr: defaultInfo.workAddrCn,
           cSType: defaultInfo.companyStockTypeCn,
           cSCurrency: defaultInfo.companyCurrenyCn,
           cSTotal: defaultInfo.stockTotal
@@ -503,7 +441,7 @@ export default {
           fNameEn1: 'NIL',
           fAddr1: 'NIL',
           fCountry1: 'NIL',
-          fStockNum1: 'NIL',
+          fStockNum1: 'NIL'
         }
       }
     },
@@ -518,7 +456,7 @@ export default {
           sUPhone: '',
           sUFax: '',
           sUEmail: '',
-          cSType: '',
+          cSType: ''
         }
       } else {
         this.form = {
@@ -546,7 +484,7 @@ export default {
     prePage() {
       if (this.active > 0) {
         this.active = this.active - 1
-      }    
+      }
       this.forthStatus = 'wait'
     },
 
@@ -579,11 +517,20 @@ export default {
             delete params.isChairman
             delete params.language
             params.fNameEn = params.fNameEn.split('-').join(' ')
-            // console.log(params)            
+            // console.log(params)
             // 如果选中的是 HKID
             if (params.certificateType == 'hkId') {
-              const [hkId1 = 'NIL', hkId2 = 'NIL', hkId3 = 'NIL', hkId4 = 'NIL', hkId5 = 'NIL', 
-              hkId6 = 'NIL', hkId7 = 'NIL', hkId8 = 'NIL', hkId9 = 'NIL'] = Array.from(params.chHKId)
+              const [
+                hkId1 = 'NIL',
+                hkId2 = 'NIL',
+                hkId3 = 'NIL',
+                hkId4 = 'NIL',
+                hkId5 = 'NIL',
+                hkId6 = 'NIL',
+                hkId7 = 'NIL',
+                hkId8 = 'NIL',
+                hkId9 = 'NIL'
+              ] = Array.from(params.chHKId)
               console.log(Array.from(params.chHKId))
               params.idN1 = hkId1
               params.idN2 = hkId2
@@ -595,14 +542,14 @@ export default {
               params.idN8 = hkId8
               params.idN9 = hkId9
             }
-            delete params.certificateType 
+            delete params.certificateType
             // 如果添加另外一位股东
             if (params.isOtherChairman) {
               params.cSType1 = params.cSType
               params.cSCurrency1 = params.cSCurrency
               params.fStockNumC1 = params.cSCurrency + params.fStockNum1
             }
-            delete params.isOtherChairman   
+            delete params.isOtherChairman
             // console.log(params)
             this.produceWord('NNC1', params)
           }
@@ -618,20 +565,26 @@ export default {
         docxParams: wordParams
       }
 
-      ProduceWord(data).then(() => {
+      ProduceWord(data)
+        .then(() => {
           this.forthStatus = 'success'
           const url = `/output/${wordName}`
           const fileName = `${wordName}.docx`
-          this.$alert(`<a href=${url} download=${fileName}>${fileName}</a>`, 'WORD 下载，点击下载', {
+          this.$alert(
+            `<a href=${url} download=${fileName}>${fileName}</a>`,
+            'WORD 下载，点击下载',
+            {
               dangerouslyUseHTMLString: true
-          })
-      }).catch(({ code, msg }) => {
+            }
+          )
+        })
+        .catch(({ code, msg }) => {
           this.$message({
-              message: msg,
-              type: 'error',
-              duration: 2000
+            message: msg,
+            type: 'error',
+            duration: 2000
           })
-      })
+        })
     }
   }
 }
@@ -651,12 +604,6 @@ export default {
   padding: 10px 0;
   border-bottom: 1px solid #333;
   margin-bottom: 16px;
-}
-
-.btn-row {
-  width: 80%;
-  margin: 0 auto;
-  text-align: right;
 }
 </style>
 

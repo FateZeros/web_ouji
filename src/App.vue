@@ -12,6 +12,8 @@ export default {
 </script>
 
 <style>
+@import './style/common.css';
+
 body {
   margin: 0;
   padding: 0;

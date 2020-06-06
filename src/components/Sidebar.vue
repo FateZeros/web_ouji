@@ -20,63 +20,82 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      const routeItems = [{
+export default {
+  data() {
+    const routeItems = [
+      {
         icon: 'el-icon-document',
         index: 'word',
         title: 'Word文档',
-        subs: [{
-          index: '/nnc1',
-          title: 'NNC1文档',
-        }, {
-          index: '/gggd',
-          title: '改股改董'
-        }, {
-          index: '/nd2a',
-          title: 'ND2A文档'
-        }, {
-          index: '/nr1',
-          title: 'NR1文档'
-        }, {
-          index: '/nar1',
-          title: 'NAR1文档',
-        }, {
-          index: '/tax',
-          title: '致税務局'
-        }, {
-          index: '/nd4',
-          title: 'ND4文档'
-        }]
-      }, {
+        subs: [
+          {
+            index: '/nnc1',
+            title: 'NNC1文档'
+          },
+          {
+            index: '/gggd',
+            title: '改股改董'
+          },
+          {
+            index: '/nd2a',
+            title: 'ND2A文档'
+          },
+          {
+            index: '/ns-cn',
+            title: '年审(中文)'
+          },
+          {
+            index: '/ns-en',
+            title: '年审(英文)'
+          }
+          // {
+          //   index: '/nr1',
+          //   title: 'NR1文档'
+          // },
+          // {
+          //   index: '/nar1',
+          //   title: 'NAR1文档'
+          // },
+          // {
+          //   index: '/tax',
+          //   title: '致税務局'
+          // },
+          // {
+          //   index: '/nd4',
+          //   title: 'ND4文档'
+          // }
+        ]
+      },
+      {
         icon: 'el-icon-setting',
         index: '/setting',
         title: '系统设置'
-      }]
+      }
+    ]
 
-      return {
-        routeItems
-      }
-    },
-    computed: {
-      onRoutes () {
-        return this.$route.path
-      }
+    return {
+      routeItems
+    }
+  },
+  computed: {
+    onRoutes() {
+      return this.$route.path
     }
   }
+}
 </script>
 
 <style scoped>
-  .sidebar{
-    position: absolute;
-    width: 250px;
-    left: 0;
-    top: 70px;
-    bottom:0;
-    background: #2E363F;
-  }
+.sidebar {
+  position: absolute;
+  width: 250px;
+  left: 0;
+  top: 70px;
+  bottom: 0;
+  background: #2e363f;
+}
 
-  .sidebar > ul {
-    height:100%;
-  }
+.sidebar > ul {
+  height: 100%;
+}
 </style>

@@ -67,7 +67,7 @@
               </el-row>
               <el-form-item label="停任日期:" prop="leaveDate">
                 <el-date-picker
-                  type="date" 
+                  type="date"
                   placeholder="选择日期"
                   v-model="form.leaveDate"
                   style="width: 100%;"
@@ -168,7 +168,7 @@
 
               <el-form-item label="委任日期:" prop="wDate">
                 <el-date-picker
-                  type="date" 
+                  type="date"
                   placeholder="选择日期"
                   v-model="form.wDate"
                   style="width: 100%;"
@@ -178,7 +178,7 @@
               </el-form-item>
               <el-form-item label="簽署日期:" prop="signDate">
                 <el-date-picker
-                  type="date" 
+                  type="date"
                   placeholder="选择日期"
                   v-model="form.signDate"
                   style="width: 100%;"
@@ -194,7 +194,7 @@
           <el-button @click="nextPage" v-show="active !== 2">下一步</el-button>
           <el-button @click="nextPage" v-show="active == 2">提交</el-button>
         </el-row>
-    </el-row> 
+    </el-row>
 </template>
 
 <script>
@@ -266,97 +266,43 @@ export default {
         widN8: 'NIL',
         widN9: 'NIL',
 
-        signDate: '',
+        signDate: ''
       },
       rules: {
-        cNumber: [
-          { required: true, message: '输入公司编号' }
-        ],
-        cNameEn: [
-          { required: true, message: '输入公司英文名稱' }
-        ],
-        cNameCn: [
-          { required: true, message: '请输入公司中文名稱' }
-        ],
-        chNameCn: [
-          { required: true, message: '请输入中文姓名' }
-        ],
-        chSureName: [
-          { required: true, message: '请输入英文姓式' }
-        ],
-        chOtherName: [
-          { required: true, message: '请输入英文名字' }
-        ],
-        chChinaId: [
-          { required: true, message: '请输入中国大陆身份证明' }
-        ],
-        chHKId: [
-          { required: true, message: '请输入香港身份证明' }
-        ],
-        psCountry: [
-          { required: true, message: '请输入護照簽發國家' }
-        ],
-        psNumber: [
-          { required: true, message: '请输入護照号码'}
-        ],
+        cNumber: [{ required: true, message: '输入公司编号' }],
+        cNameEn: [{ required: true, message: '输入公司英文名稱' }],
+        cNameCn: [{ required: true, message: '请输入公司中文名稱' }],
+        chNameCn: [{ required: true, message: '请输入中文姓名' }],
+        chSureName: [{ required: true, message: '请输入英文姓式' }],
+        chOtherName: [{ required: true, message: '请输入英文名字' }],
+        chChinaId: [{ required: true, message: '请输入中国大陆身份证明' }],
+        chHKId: [{ required: true, message: '请输入香港身份证明' }],
+        psCountry: [{ required: true, message: '请输入護照簽發國家' }],
+        psNumber: [{ required: true, message: '请输入護照号码' }],
 
-        leaveDate: [
-          { required: true, message: '请输入选择停任日期' }
-        ],
+        leaveDate: [{ required: true, message: '请输入选择停任日期' }],
 
-        sUName: [
-          { required: true, message: '请输入提交人名稱' }
-        ],
-        sUAddr: [
-          { required: true, message: '请输入提交人地址' }
-        ],
-        sUPhone: [
-          { required: true, message: '请输入提交人電話' }
-        ],
-        sUFax: [
-          { required: true, message: '请输入提交人傳真' }
-        ], 
-        sUEmail: [
-          { required: true, message: '请输入提交人電郵' }
-        ],
+        sUName: [{ required: true, message: '请输入提交人名稱' }],
+        sUAddr: [{ required: true, message: '请输入提交人地址' }],
+        sUPhone: [{ required: true, message: '请输入提交人電話' }],
+        sUFax: [{ required: true, message: '请输入提交人傳真' }],
+        sUEmail: [{ required: true, message: '请输入提交人電郵' }],
 
-        wNameCn: [
-          { required: true, message: '请输入中文姓名' }
-        ],
-        wSureName: [
-          { required: true, message: '请输入英文姓式' }
-        ],
-        wOtherName: [
-          { required: true, message: '请输入英文名字' }
-        ],
-        wAddr: [
-          { required: true, message: '请输入联络地址或证件地址' }
-        ],
-        wCountry: [
-          { required: true, message: '请输入國家／地區' }
-        ],
-        wChinaId: [
-          { required: true, message: '请输入中国大陆身份证明' }
-        ],
-        wHKId: [
-          { required: true, message: '请输入香港身份证明' }
-        ],
-        wpsCountry: [
-          { required: true, message: '请输入護照簽發國家' }
-        ],
-        wpsNumber: [
-          { required: true, message: '请输入護照号码'}
-        ],
-        wDate: [
-          { required: true, message: '请输入委任日期' }
-        ],
-        signDate: [
-          { required: true, message: '请输入簽署日期' }
-        ]
+        wNameCn: [{ required: true, message: '请输入中文姓名' }],
+        wSureName: [{ required: true, message: '请输入英文姓式' }],
+        wOtherName: [{ required: true, message: '请输入英文名字' }],
+        wAddr: [{ required: true, message: '请输入联络地址或证件地址' }],
+        wCountry: [{ required: true, message: '请输入國家／地區' }],
+        wChinaId: [{ required: true, message: '请输入中国大陆身份证明' }],
+        wHKId: [{ required: true, message: '请输入香港身份证明' }],
+        wpsCountry: [{ required: true, message: '请输入護照簽發國家' }],
+        wpsNumber: [{ required: true, message: '请输入護照号码' }],
+        wDate: [{ required: true, message: '请输入委任日期' }],
+        signDate: [{ required: true, message: '请输入簽署日期' }]
       },
       submitUser: {
         userInfo: 'defaultUser'
-      },
+      }
     }
   },
 
@@ -370,7 +316,7 @@ export default {
           sUAddr: '',
           sUPhone: '',
           sUFax: '',
-          sUEmail: '',
+          sUEmail: ''
         }
       } else {
         this.form = {
@@ -407,7 +353,7 @@ export default {
     prePage() {
       if (this.active > 0) {
         this.active = this.active - 1
-      }    
+      }
       this.forthStatus = 'wait'
     },
 
@@ -420,7 +366,6 @@ export default {
       this.$refs[formObj[this.active]].validate(valid => {
         if (valid) {
           if (this.active < 2) {
-            
             this.active = this.active + 1
           } else {
             const params = Object.assign({}, this.form)
@@ -433,8 +378,17 @@ export default {
             params.wDD = params.wDate.split('/')[0]
             // 如果选中的是 HKID
             if (params.certificateType == 'hkId') {
-              const [hkId1 = 'NIL', hkId2 = 'NIL', hkId3 = 'NIL', hkId4 = 'NIL', hkId5 = 'NIL', 
-              hkId6 = 'NIL', hkId7 = 'NIL', hkId8 = 'NIL', hkId9 = 'NIL'] = Array.from(params.chHKId)
+              const [
+                hkId1 = 'NIL',
+                hkId2 = 'NIL',
+                hkId3 = 'NIL',
+                hkId4 = 'NIL',
+                hkId5 = 'NIL',
+                hkId6 = 'NIL',
+                hkId7 = 'NIL',
+                hkId8 = 'NIL',
+                hkId9 = 'NIL'
+              ] = Array.from(params.chHKId)
               console.log(Array.from(params.chHKId))
               params.idN1 = hkId1
               params.idN2 = hkId2
@@ -446,12 +400,21 @@ export default {
               params.idN8 = hkId8
               params.idN9 = hkId9
             }
-            delete params.certificateType 
+            delete params.certificateType
 
             // 如果选中的是 HKID
             if (params.certificateType2 == 'whkId') {
-              const [hkId1 = 'NIL', hkId2 = 'NIL', hkId3 = 'NIL', hkId4 = 'NIL', hkId5 = 'NIL', 
-              hkId6 = 'NIL', hkId7 = 'NIL', hkId8 = 'NIL', hkId9 = 'NIL'] = Array.from(params.wHKId)
+              const [
+                hkId1 = 'NIL',
+                hkId2 = 'NIL',
+                hkId3 = 'NIL',
+                hkId4 = 'NIL',
+                hkId5 = 'NIL',
+                hkId6 = 'NIL',
+                hkId7 = 'NIL',
+                hkId8 = 'NIL',
+                hkId9 = 'NIL'
+              ] = Array.from(params.wHKId)
               console.log(Array.from(params.chHKId))
               params.widN1 = hkId1
               params.widN2 = hkId2
@@ -463,7 +426,7 @@ export default {
               params.widN8 = hkId8
               params.widN9 = hkId9
             }
-            delete params.certificateType2 
+            delete params.certificateType2
             // console.log(params)
             this.produceWord('ND2A', params)
           }
@@ -477,25 +440,30 @@ export default {
       const data = {
         docxName: wordName,
         docxParams: wordParams
-    }
+      }
 
-    ProduceWord(data).then(() => {
+      ProduceWord(data)
+        .then(() => {
           this.forthStatus = 'success'
           const url = `/output/${wordName}`
           const fileName = `${wordName}.docx`
-          this.$alert(`<a href=${url} download=${fileName}>${fileName}</a>`, 'WORD 下载，点击下载', {
+          this.$alert(
+            `<a href=${url} download=${fileName}>${fileName}</a>`,
+            'WORD 下载，点击下载',
+            {
               dangerouslyUseHTMLString: true
-          })
-      }).catch(({ code, msg }) => {
+            }
+          )
+        })
+        .catch(({ code, msg }) => {
           this.$message({
-              message: msg,
-              type: 'error',
-              duration: 2000
+            message: msg,
+            type: 'error',
+            duration: 2000
           })
-      })
+        })
     }
   }
-  
 }
 </script>
 

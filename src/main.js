@@ -17,9 +17,9 @@ router.beforeEach((to, from, next) => {
   if (!userInfo) {
     // 无登录信息
     if (to.path !== '/login') {
-        next('/login')
+      next('/login')
     } else {
-        next()
+      next()
     }
     // next()
   } else {
