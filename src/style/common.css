@@ -18,3 +18,8 @@
   margin: 0 auto;
   text-align: right;
 }
+
+.form-item-container {
+  width: 80%;
+  margin: 0 auto;
+}
