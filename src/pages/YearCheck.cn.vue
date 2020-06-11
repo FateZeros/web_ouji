@@ -2,7 +2,8 @@
   <el-row>
     <el-steps :active="active" finish-status="success">
       <el-step title="税务局改地址"></el-step>
-      <el-step title="NAR1周年申报表"></el-step>
+      <el-step title="NAR1周年申报表1"></el-step>
+      <el-step title="NAR1周年申报表2"></el-step>
       <el-step title="ND2A"></el-step>
       <el-step title="NR1註冊辦事處地址" :status="forthStatus"></el-step>
     </el-steps>
@@ -87,17 +88,47 @@
           <el-input v-model="form.sUEmail" placeholder="提交人電郵" type="email"></el-input>
         </el-form-item>
       </el-row>
+      <el-row class="module-title">C.股本信息　Share Capital</el-row>
+      <el-row class="form-item-container">
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="股份的類別:" prop="cSType">
+              <el-input v-model="form.cSType" placeholder="股份的類別"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="貨幣:" prop="cSCurrency">
+              <el-input v-model="form.cSCurrency" placeholder="貨幣(HKD)"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-form-item label="建議發行股份總數:" prop="cSTotal">
+            <el-input v-model="form.cSTotal" placeholder="建議發行股份總數(数字)"></el-input>
+          </el-form-item>
+        </el-row>
+      </el-row>
     </el-form>
 
-    <!-- ND2A page3 -->
-    <el-form v-show="active ===3" class="page-content" ref="formPage3" :model="form" :rules="rules" label-width="150px">
+    <!-- NAR1 page3 -->
+    <el-form v-show="active ===3" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
+      <el-row class="module-title">
+        A.公司秘書 (法人團體) Company Secretary
+      </el-row>
+      <el-row class="module-title">
+        B.董事 (自然人) Director (Natural Person)
+      </el-row>
+    </el-form>
+
+    <!-- ND2A page4 -->
+    <el-form v-show="active ===4" class="page-content" ref="formPage3" :model="form" :rules="rules" label-width="150px">
       <el-row class="module-title">
         A.更改公司秘書及董事通知書
       </el-row>
     </el-form>
 
-    <!-- NR1 page4 -->
-    <el-form v-show="active ===4" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
+    <!-- NR1 page5 -->
+    <el-form v-show="active ===5" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
       <el-row class="module-title">
         A.註冊辦事處地址更改通知書
       </el-row>
@@ -136,7 +167,11 @@ export default {
         sUAddr: defaultInfo.userAddr,
         sUPhone: defaultInfo.userPhone,
         sUFax: defaultInfo.userFax,
-        sUEmail: defaultInfo.userEmail
+        sUEmail: defaultInfo.userEmail,
+
+        cSType: defaultInfo.companyStockTypeCn,
+        cSCurrency: defaultInfo.companyCurrenyCn,
+        cSTotal: defaultInfo.stockTotal
       },
       submitUser: {
         userInfo: 'defaultUser'
@@ -156,7 +191,11 @@ export default {
         sUAddr: [{ required: true, message: '请输入提交人地址' }],
         sUPhone: [{ required: true, message: '请输入提交人電話' }],
         sUFax: [{ required: true, message: '请输入提交人傳真' }],
-        sUEmail: [{ required: true, message: '请输入提交人電郵' }]
+        sUEmail: [{ required: true, message: '请输入提交人電郵' }],
+
+        cSType: [{ required: true, message: '请输入股份的類別' }],
+        cSCurrency: [{ required: true, message: '请输入貨幣' }],
+        cSTotal: [{ required: true, message: '请输入建議發行的股份總數' }]
       }
     }
   },
