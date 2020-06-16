@@ -115,8 +115,42 @@
       <el-row class="module-title">
         A.公司秘書 (法人團體) Company Secretary
       </el-row>
+      <el-row>
+        <el-form-item label="公司中文名稱:" prop="cNameCnPage3">
+          <el-input v-model="form.cNameCnPage3" placeholder="公司中文名称只能由数字或中文汉字以及符号与空格并以有限公司结尾"></el-input>
+        </el-form-item>
+        <el-form-item label="公司英文名稱:" prop="cNameEnPage3">
+          <el-input v-model="form.cNameEnPage3" placeholder="公司英文名称只能由字母以及符号和空格组成并以 LIMITED 结尾"></el-input>
+        </el-form-item>
+        <el-form-item label="香港地址:" prop="hkAddrPage3">
+          <el-input v-model="form.hkAddrPage3" placeholder="公司香港地址"></el-input>
+        </el-form-item>
+      </el-row>
       <el-row class="module-title">
         B.董事 (自然人) Director (Natural Person)
+      </el-row>
+      <el-row>
+        <el-form-item label="董事中文姓名:" prop="dNameCnPage3">
+          <el-input v-model="form.dNameCnPage3" placeholder="董事中文姓名"></el-input>
+        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="董事英文姓名-姓氏:" prop="dNameEn1Page3">
+              <el-input v-model="form.dNameEn1Page3" placeholder="董事英文姓名-姓氏"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="董事英文姓名-名字:" prop="dNameEn2Page3">
+              <el-input v-model="form.dNameEn2Page3" placeholder="董事英文姓名-名字"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="董事住址:" prop="dAddrPage3">
+          <el-input v-model="form.dAddrPage3" placeholder="董事住址"></el-input>
+        </el-form-item>
+        <el-form-item label="中國身份證號碼:" prop="dIdNumPage3">
+          <el-input v-model="form.dIdNumPage3" type="dIdNumPage3" placeholder="中國身份證號碼"></el-input>
+        </el-form-item>
       </el-row>
     </el-form>
 
@@ -148,7 +182,7 @@ import defaultInfo from '@/config/defaultInfo'
 export default {
   data() {
     return {
-      active: 2,
+      active: 3,
       forthStatus: 'wait',
 
       form: {
@@ -171,7 +205,16 @@ export default {
 
         cSType: defaultInfo.companyStockTypeCn,
         cSCurrency: defaultInfo.companyCurrenyCn,
-        cSTotal: defaultInfo.stockTotal
+        cSTotal: defaultInfo.stockTotal,
+
+        cNameCnPage3: '',
+        cNameEnPage3: '',
+        hkAddrPage3: '',
+        dNameCnPage3: '',
+        dNameEn1Page3: '',
+        dNameEn2Page3: '',
+        dAddrPage3: '',
+        dIdNumPage3: ''
       },
       submitUser: {
         userInfo: 'defaultUser'
@@ -195,7 +238,21 @@ export default {
 
         cSType: [{ required: true, message: '请输入股份的類別' }],
         cSCurrency: [{ required: true, message: '请输入貨幣' }],
-        cSTotal: [{ required: true, message: '请输入建議發行的股份總數' }]
+        cSTotal: [{ required: true, message: '请输入建議發行的股份總數' }],
+
+        cNameCnPage3: [{ required: true, message: '请输入公司英文名稱' }],
+        cNameEnPage3: [{ required: true, message: '请输入公司中文名稱' }],
+        hkAddrPage3: [{ required: true, message: '请输入公司香港地址' }],
+        dNameCnPage3: [{ required: true, message: '请输入董事中文姓名' }],
+        dNameEn1Page3: [{ required: true, message: '请输入董事英文姓名-姓氏' }],
+        dNameEn2Page3: [{ required: true, message: '请输入董事英文姓名-名字' }],
+        dAddrPage3: [{ required: true, message: '请输入董事住址' }],
+        dIdNumPage3: [
+          {
+            required: true,
+            message: '请输入正确中國身份證號碼'
+          }
+        ]
       }
     }
   },
