@@ -1,7 +1,7 @@
 import { makeRequest } from '@/utils/restApi'
 
 // 登录接口
-export function Login (data) {
+export function Login(data) {
   return makeRequest({
     url: '/api/login',
     method: 'post',
@@ -10,9 +10,18 @@ export function Login (data) {
 }
 
 // 生成word
-export function ProduceWord (data) {
+export function ProduceWord(data) {
   return makeRequest({
     url: '/api/produceword',
+    method: 'post',
+    data
+  })
+}
+
+// 生成 zip
+export function ProduceWordZip(data) {
+  return makeRequest({
+    url: '/api/produceword-muti',
     method: 'post',
     data
   })

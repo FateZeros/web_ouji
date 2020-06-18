@@ -111,19 +111,19 @@
     </el-form>
 
     <!-- NAR1 page3 -->
-    <el-form v-show="active ===3" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
+    <el-form v-show="active ===3" class="page-content" ref="formPage3" :model="form" :rules="rules" label-width="150px">
       <el-row class="module-title">
         A.公司秘書 (法人團體) Company Secretary
       </el-row>
       <el-row>
         <el-form-item label="公司中文名稱:" prop="cNameCnPage3">
-          <el-input v-model="form.cNameCnPage3" placeholder="公司中文名称只能由数字或中文汉字以及符号与空格并以有限公司结尾"></el-input>
+          <el-input v-model="form.cNameCnPage3" placeholder="请输入公司中文名称只能由数字或中文汉字以及符号与空格并以有限公司结尾"></el-input>
         </el-form-item>
         <el-form-item label="公司英文名稱:" prop="cNameEnPage3">
-          <el-input v-model="form.cNameEnPage3" placeholder="公司英文名称只能由字母以及符号和空格组成并以 LIMITED 结尾"></el-input>
+          <el-input v-model="form.cNameEnPage3" placeholder="请输入公司英文名称只能由字母以及符号和空格组成并以 LIMITED 结尾"></el-input>
         </el-form-item>
         <el-form-item label="香港地址:" prop="hkAddrPage3">
-          <el-input v-model="form.hkAddrPage3" placeholder="公司香港地址"></el-input>
+          <el-input v-model="form.hkAddrPage3" placeholder="请输入公司香港地址"></el-input>
         </el-form-item>
       </el-row>
       <el-row class="module-title">
@@ -131,38 +131,41 @@
       </el-row>
       <el-row>
         <el-form-item label="董事中文姓名:" prop="dNameCnPage3">
-          <el-input v-model="form.dNameCnPage3" placeholder="董事中文姓名"></el-input>
+          <el-input v-model="form.dNameCnPage3" placeholder="请输入董事中文姓名"></el-input>
         </el-form-item>
         <el-row>
           <el-col :span="12">
             <el-form-item label="董事英文姓名-姓氏:" prop="dNameEn1Page3">
-              <el-input v-model="form.dNameEn1Page3" placeholder="董事英文姓名-姓氏"></el-input>
+              <el-input v-model="form.dNameEn1Page3" placeholder="请输入董事英文姓名-姓氏"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="董事英文姓名-名字:" prop="dNameEn2Page3">
-              <el-input v-model="form.dNameEn2Page3" placeholder="董事英文姓名-名字"></el-input>
+              <el-input v-model="form.dNameEn2Page3" placeholder="请输入董事英文姓名-名字"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item label="董事住址:" prop="dAddrPage3">
-          <el-input v-model="form.dAddrPage3" placeholder="董事住址"></el-input>
+          <el-input v-model="form.dAddrPage3" placeholder="请输入董事住址"></el-input>
         </el-form-item>
         <el-form-item label="中國身份證號碼:" prop="dIdNumPage3">
-          <el-input v-model="form.dIdNumPage3" type="dIdNumPage3" placeholder="中國身份證號碼"></el-input>
+          <el-input v-model="form.dIdNumPage3" type="number" placeholder="请输入中國身份證號碼"></el-input>
+        </el-form-item>
+         <el-form-item label="現時股份持有量:" prop="sharePage3">
+          <el-input v-model="form.sharePage3" type="number" placeholder="请输入現時股份持有量"></el-input>
         </el-form-item>
       </el-row>
     </el-form>
 
     <!-- ND2A page4 -->
-    <el-form v-show="active ===4" class="page-content" ref="formPage3" :model="form" :rules="rules" label-width="150px">
+    <el-form v-show="active ===4" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
       <el-row class="module-title">
         A.更改公司秘書及董事通知書
       </el-row>
     </el-form>
 
     <!-- NR1 page5 -->
-    <el-form v-show="active ===5" class="page-content" ref="formPage4" :model="form" :rules="rules" label-width="150px">
+    <el-form v-show="active ===5" class="page-content" ref="formPage5" :model="form" :rules="rules" label-width="150px">
       <el-row class="module-title">
         A.註冊辦事處地址更改通知書
       </el-row>
@@ -178,11 +181,12 @@
 
 <script>
 import defaultInfo from '@/config/defaultInfo'
+import { ProduceWordZip } from '@/api'
 
 export default {
   data() {
     return {
-      active: 3,
+      active: 4,
       forthStatus: 'wait',
 
       form: {
@@ -214,7 +218,8 @@ export default {
         dNameEn1Page3: '',
         dNameEn2Page3: '',
         dAddrPage3: '',
-        dIdNumPage3: ''
+        dIdNumPage3: '',
+        sharePage3: ''
       },
       submitUser: {
         userInfo: 'defaultUser'
@@ -251,6 +256,12 @@ export default {
           {
             required: true,
             message: '请输入正确中國身份證號碼'
+          }
+        ],
+        sharePage3: [
+          {
+            required: true,
+            message: '请输入現時股份持有量'
           }
         ]
       }
@@ -295,16 +306,61 @@ export default {
         1: 'formPage1',
         2: 'formPage2',
         3: 'formPage3',
-        4: 'formPage4'
+        4: 'formPage4',
+        5: 'formPage5'
       }
 
       this.$refs[formObj[this.active]].validate(valid => {
         if (valid) {
-          this.active += 1
+          if (this.active < 5) {
+            this.active = this.active + 1
+          } else {
+            const params = Object.assign({}, this.form)
+            const [
+              settleDateD,
+              settleDateM,
+              settleDateY
+            ] = params.settleDate.split('/')
+            params.sDateY = settleDateY
+            params.sDateM = settleDateM
+            params.sDateD = settleDateD
+            console.log(params)
+            const wordName = ['NS1', 'NS2', 'NS3', 'NS4']
+            // this.produceWord(wordName, 'NS-CN', params)
+          }
         } else {
           return false
         }
       })
+    },
+
+    produceWord(wordName, tempName, wordParams) {
+      const data = {
+        docxName: wordName,
+        tempName: tempName,
+        docxParams: wordParams
+      }
+
+      ProduceWordZip(data)
+        .then(() => {
+          this.forthStatus = 'success'
+          const url = '/output/NS-CN.zip'
+          const fileName = 'NS-CN.zip'
+          this.$alert(
+            `<a href=${url} download=${fileName}>${fileName}</a>`,
+            '文件下载，点击下载',
+            {
+              dangerouslyUseHTMLString: true
+            }
+          )
+        })
+        .catch(({ code, msg }) => {
+          this.$message({
+            message: msg,
+            type: 'error',
+            duration: 2000
+          })
+        })
     }
   }
 }
