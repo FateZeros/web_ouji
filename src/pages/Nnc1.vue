@@ -209,8 +209,8 @@
           </el-form-item>
           <el-form-item label="证件类型:">
               <el-radio-group v-model="form.certificateType" @change="changeCertificateType">
-                <el-radio label="chinaId">身份證明CHINA ID</el-radio>
-                <el-radio label="hkId">身份分證明HongKong ID</el-radio>
+                <el-radio label="chinaId">中国身份证号码</el-radio>
+                <el-radio label="hkId">香港身份证号码</el-radio>
                 <el-radio label="passport">護照</el-radio>
               </el-radio-group>
           </el-form-item>
@@ -233,11 +233,11 @@
               </el-col>
           </el-row>
           <el-row>
-            <el-col :span="12">
+            <!-- <el-col :span="12">
               <el-form-item label="姓名簽署:" prop="fNameSigned">
                   <el-input v-model="form.fNameSigned" placeholder="姓名簽署"></el-input>
               </el-form-item>
-            </el-col>
+            </el-col> -->
             <el-col :span="12">
               <el-form-item label="簽署日期:" prop="fDateSigned">
                 <el-date-picker
@@ -325,7 +325,7 @@ export default {
         chCountry: '',
         chAddr: '',
 
-        fNameSigned: '',
+        // fNameSigned: '',
         fDateSigned: '',
 
         // 证件类型
@@ -406,7 +406,7 @@ export default {
           { required: true, message: '请输入護照號碼' }
           // { validator: validateRequire }
         ],
-        fNameSigned: [{ required: true, message: '请输入姓名簽署' }],
+        // fNameSigned: [{ required: true, message: '请输入姓名簽署' }],
         fDateSigned: [{ required: true, message: '请输入选择日期' }]
       }
     }

@@ -142,8 +142,8 @@
 
               <el-form-item label="证件类型:">
                   <el-radio-group v-model="form.certificateType2" @change="changeCertificateType2">
-                    <el-radio label="wchinaId">身份證明CHINA ID</el-radio>
-                    <el-radio label="whkId">身份分證明HongKong ID</el-radio>
+                    <el-radio label="wchinaId">中国身份证明</el-radio>
+                    <el-radio label="whkId">香港身份证明</el-radio>
                     <el-radio label="wpassport">護照</el-radio>
                   </el-radio-group>
               </el-form-item>

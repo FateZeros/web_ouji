@@ -42,11 +42,11 @@ export default {
           },
           {
             index: '/ns-cn',
-            title: '年审(中文)'
+            title: '年审(海铭)'
           },
           {
             index: '/ns-en',
-            title: '年审(英文)'
+            title: '年审(欧记)'
           }
           // {
           //   index: '/nr1',

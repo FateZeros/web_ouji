@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-	    <div class="logo">鸥记商务</div>
+	    <div class="logo">欧记商务</div>
     <div class="user-info">
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -19,7 +19,7 @@
 import demoUser from '@/assets/demoUser.jpg'
 
 export default {
-  data () {
+  data() {
     let userInfo = localStorage.getItem('OUJI_INFO') || '{}'
     // console.log(userInfo)
     if (userInfo) {
@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    handleCommand (command) {
+    handleCommand(command) {
       if (command === 'loginout') {
         localStorage.setItem('OUJI_INFO', '')
         this.$router.push('/login')
@@ -65,7 +65,7 @@ export default {
   color: #fff;
 }
 
-.user-info .el-dropdown-link{
+.user-info .el-dropdown-link {
   position: relative;
   display: inline-block;
   padding-left: 50px;
@@ -74,17 +74,17 @@ export default {
   vertical-align: middle;
 }
 
-.user-info .user-img{
+.user-info .user-img {
   position: absolute;
-  left:0;
-  width:40px;
-  height:40px;
+  left: 0;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   top: 50%;
   margin-top: -20px;
 }
 
-.el-dropdown-menu__item{
+.el-dropdown-menu__item {
   text-align: center;
 }
 </style>
