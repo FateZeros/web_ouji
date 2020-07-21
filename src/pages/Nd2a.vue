@@ -1,200 +1,401 @@
 <template>
-    <el-row>
-        <el-steps :active="active" finish-status="success">
-          <el-step title="公司秘書／董事的停任"></el-step>
-          <el-step title="提交人的资料"></el-step>
-          <el-step title="委任公司秘書／董事" :status="forthStatus"></el-step>
-        </el-steps>
+  <el-row>
+    <el-steps
+      :active="active"
+      finish-status="success"
+    >
+      <el-step title="公司秘書／董事的停任"></el-step>
+      <el-step title="提交人的资料"></el-step>
+      <el-step
+        title="委任公司秘書／董事"
+        :status="forthStatus"
+      ></el-step>
+    </el-steps>
 
-        <!-- page1 -->
-        <el-form v-show="active == 0" class="ncc1-page" ref="formPage0" :model="form" :rules="rules" label-width="150px">
-            <el-row class="nnc1-module-title">A.公司秘書／董事的停任 Cessation to Act as Company Secretary／Director</el-row>
-            <el-row class="form-item-container">
-              <el-form-item label="公司編號:" prop="cNumber">
-                <el-input v-model="form.cNumber" placeholder="输入公司编号"></el-input>
-              </el-form-item>
-              <el-form-item label="公司英文名稱:" prop="cNameEn">
-                <el-input v-model="form.cNameEn" placeholder="公司英文名称只能由字母以及符号和空格组成并以 LIMITED 结尾"></el-input>
-              </el-form-item>
-              <el-form-item label="公司中文名稱:" prop="cNameCn">
-                <el-input v-model="form.cNameCn" placeholder="公司中文名称只能由数字或中文汉字以及符号与空格并以有限公司结尾"></el-input>
-              </el-form-item>
-            </el-row>
+    <!-- page1 -->
+    <el-form
+      v-show="active == 0"
+      class="ncc1-page"
+      ref="formPage0"
+      :model="form"
+      :rules="rules"
+      label-width="150px"
+    >
+      <el-row class="nnc1-module-title">A.公司秘書／董事的停任 Cessation to Act as Company Secretary／Director</el-row>
+      <el-row class="form-item-container">
+        <el-form-item
+          label="公司編號:"
+          prop="cNumber"
+        >
+          <el-input
+            v-model="form.cNumber"
+            placeholder="输入公司编号"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="公司英文名稱:"
+          prop="cNameEn"
+        >
+          <el-input
+            v-model="form.cNameEn"
+            placeholder="公司英文名称只能由字母以及符号和空格组成并以 LIMITED 结尾"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="公司中文名稱:"
+          prop="cNameCn"
+        >
+          <el-input
+            v-model="form.cNameCn"
+            placeholder="公司中文名称只能由数字或中文汉字以及符号与空格并以有限公司结尾"
+          ></el-input>
+        </el-form-item>
+      </el-row>
 
-            <el-row class="nnc1-module-title">B.公司秘書／董事的詳情 (自然人) Particulars of Company Secretary／Director</el-row>
-            <el-row class="form-item-container">
-              <el-row>
-                <el-col :span="8">
-                  <el-form-item label="中文姓名:" prop="chNameCn">
-                      <el-input v-model="form.chNameCn" placeholder="中文姓名"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="英文姓名:" prop="chSureName">
-                      <el-input v-model="form.chSureName" placeholder="英文姓式"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="英文姓名:" prop="chOtherName">
-                      <el-input v-model="form.chOtherName" placeholder="英文名字"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-form-item label="证件类型:">
-                  <el-radio-group v-model="form.certificateType" @change="changeCertificateType">
-                    <el-radio label="chinaId">身份證明CHINA ID</el-radio>
-                    <el-radio label="hkId">身份分證明HongKong ID</el-radio>
-                    <el-radio label="passport">護照</el-radio>
-                  </el-radio-group>
-              </el-form-item>
-              <el-form-item v-show="form.certificateType == 'chinaId'" label="大陆身份证明ID:" prop="chChinaId">
-                <el-input v-model="form.chChinaId" placeholder="中国大陆身份证明"></el-input>
-              </el-form-item>
-              <el-form-item v-show="form.certificateType == 'hkId'" prop="chHKId">
-                  <el-input v-model="form.chHKId" placeholder="个人董事在香港身份证号码"></el-input>
-              </el-form-item>
-              <el-row v-show="form.certificateType == 'passport'">
-                  <el-col :span="12">
-                      <el-form-item label="護照簽發國家:" prop="psCountry">
-                        <el-input v-model="form.psCountry" placeholder="護照簽發國家"></el-input>
-                      </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                      <el-form-item label="護照號碼:" prop="psNumber">
-                        <el-input v-model="form.psNumber" placeholder="護照號碼"></el-input>
-                      </el-form-item>
-                  </el-col>
-              </el-row>
-              <el-form-item label="停任日期:" prop="leaveDate">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="form.leaveDate"
-                  style="width: 100%;"
-                  format="dd/MM/yyyy"
-                  value-format="dd/MM/yyyy"
-                ></el-date-picker>
-              </el-form-item>
-            </el-row>
-        </el-form>
-
-        <!-- page2 -->
-        <el-form v-show="active == 1" class="ncc1-page" ref="formPage1" :model="form" :rules="rules" label-width="150px">
-          <el-row class="nnc1-module-title">提交人的资料　Presentor’s Reference</el-row>
-            <el-row class="form-item-container">
-                <el-form-item label="提交人信息">
-                  <el-radio-group v-model="submitUser.userInfo" @change="changeSubmitUser">
-                    <el-radio label="defaultUser">默认</el-radio>
-                    <el-radio label="selfUser">自定义</el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="提交人名稱:" prop="sUName">
-                  <el-input v-model="form.sUName" placeholder="提交人的中文名称"></el-input>
-                </el-form-item>
-                <el-form-item label="提交人地址:" prop="sUAddr">
-                  <el-input v-model="form.sUAddr" placeholder="提交人的地址"></el-input>
-                </el-form-item>
-                <el-row>
-                  <el-col :span="12">
-                    <el-form-item label="提交人電話:" prop="sUPhone">
-                      <el-input v-model="form.sUPhone" placeholder="提交人電話"></el-input>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                    <el-form-item label="提交人傳真:" prop="sUFax">
-                      <el-input v-model="form.sUFax" placeholder="提交人傳真"></el-input>
-                    </el-form-item>
-                  </el-col>
-                </el-row>
-                <el-form-item label="提交人電郵:" prop="sUEmail">
-                    <el-input v-model="form.sUEmail" placeholder="提交人電郵" type="email"></el-input>
-                </el-form-item>
-            </el-row>
-        </el-form>
-
-        <!-- page3 -->
-        <el-form v-show="active == 2" class="ncc1-page" ref="formPage2" :model="form" :rules="rules" label-width="150px">
-          <el-row class="nnc1-module-title">委任公司秘書／董事　Appointment of Company Secretary／Director</el-row>
-          <el-row class="form-item-container">
-              <el-row>
-                <el-col :span="8">
-                  <el-form-item label="中文姓名:" prop="wNameCn">
-                      <el-input v-model="form.wNameCn" placeholder="中文姓名"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="英文姓名:" prop="wSureName">
-                      <el-input v-model="form.wSureName" placeholder="英文姓式"></el-input>
-                  </el-form-item>
-                </el-col>
-                <el-col :span="8">
-                  <el-form-item label="英文姓名:" prop="wOtherName">
-                      <el-input v-model="form.wOtherName" placeholder="英文名字"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-form-item label="地址:" prop="wAddr">
-                <el-input v-model="form.wAddr" placeholder="联络地址或证件地址"></el-input>
-              </el-form-item>
-              <el-form-item label="國家／地區:" prop="wCountry">
-                  <el-input v-model="form.wCountry" placeholder="國家／地區"></el-input>
-              </el-form-item>
-
-              <el-form-item label="证件类型:">
-                  <el-radio-group v-model="form.certificateType2" @change="changeCertificateType2">
-                    <el-radio label="wchinaId">中国身份证明</el-radio>
-                    <el-radio label="whkId">香港身份证明</el-radio>
-                    <el-radio label="wpassport">護照</el-radio>
-                  </el-radio-group>
-              </el-form-item>
-              <el-form-item v-show="form.certificateType2 == 'wchinaId'" label="大陆身份证明ID:" prop="wChinaId">
-                <el-input v-model="form.wChinaId" placeholder="中国大陆身份证明"></el-input>
-              </el-form-item>
-              <el-form-item v-show="form.certificateType2 == 'whkId'" prop="wHKId">
-                  <el-input v-model="form.wHKId" placeholder="个人董事在香港身份证号码"></el-input>
-              </el-form-item>
-              <el-row v-show="form.certificateType2 == 'wpassport'">
-                  <el-col :span="12">
-                      <el-form-item label="護照簽發國家:" prop="wpsCountry">
-                        <el-input v-model="form.wpsCountry" placeholder="護照簽發國家"></el-input>
-                      </el-form-item>
-                  </el-col>
-                  <el-col :span="12">
-                      <el-form-item label="護照號碼:" prop="wpsNumber">
-                        <el-input v-model="form.wpsNumber" placeholder="護照號碼"></el-input>
-                      </el-form-item>
-                  </el-col>
-              </el-row>
-
-              <el-form-item label="委任日期:" prop="wDate">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="form.wDate"
-                  style="width: 100%;"
-                  format="dd/MM/yyyy"
-                  value-format="dd/MM/yyyy"
-                ></el-date-picker>
-              </el-form-item>
-              <el-form-item label="簽署日期:" prop="signDate">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="form.signDate"
-                  style="width: 100%;"
-                  format="dd/MM/yyyy"
-                  value-format="dd/MM/yyyy"
-                ></el-date-picker>
-              </el-form-item>
-          </el-row>
-        </el-form>
-
-        <el-row class="btn-row">
-          <el-button @click="prePage" v-show="active !== 0">上一步</el-button>
-          <el-button @click="nextPage" v-show="active !== 2">下一步</el-button>
-          <el-button @click="nextPage" v-show="active == 2">提交</el-button>
+      <el-row class="nnc1-module-title">B.公司秘書／董事的詳情 (自然人) Particulars of Company Secretary／Director</el-row>
+      <el-row class="form-item-container">
+        <el-row>
+          <el-col :span="8">
+            <el-form-item
+              label="中文姓名:"
+              prop="chNameCn"
+            >
+              <el-input
+                v-model="form.chNameCn"
+                placeholder="中文姓名"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item
+              label="英文姓名:"
+              prop="chSureName"
+            >
+              <el-input
+                v-model="form.chSureName"
+                placeholder="英文姓式"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item
+              label="英文姓名:"
+              prop="chOtherName"
+            >
+              <el-input
+                v-model="form.chOtherName"
+                placeholder="英文名字"
+              ></el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
+        <el-form-item label="证件类型:">
+          <el-radio-group
+            v-model="form.certificateType"
+            @change="changeCertificateType"
+          >
+            <el-radio label="chinaId">身份證明CHINA ID</el-radio>
+            <el-radio label="hkId">身份分證明HongKong ID</el-radio>
+            <el-radio label="passport">護照</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          v-show="form.certificateType == 'chinaId'"
+          label="大陆身份证明ID:"
+          prop="chChinaId"
+        >
+          <el-input
+            v-model="form.chChinaId"
+            placeholder="中国大陆身份证明"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          v-show="form.certificateType == 'hkId'"
+          prop="chHKId"
+        >
+          <el-input
+            v-model="form.chHKId"
+            placeholder="个人董事在香港身份证号码"
+          ></el-input>
+        </el-form-item>
+        <el-row v-show="form.certificateType == 'passport'">
+          <el-col :span="12">
+            <el-form-item
+              label="護照簽發國家:"
+              prop="psCountry"
+            >
+              <el-input
+                v-model="form.psCountry"
+                placeholder="護照簽發國家"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item
+              label="護照號碼:"
+              prop="psNumber"
+            >
+              <el-input
+                v-model="form.psNumber"
+                placeholder="護照號碼"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item
+          label="停任日期:"
+          prop="leaveDate"
+        >
+          <el-date-picker
+            type="date"
+            placeholder="选择日期"
+            v-model="form.leaveDate"
+            style="width: 100%;"
+            format="dd/MM/yyyy"
+            value-format="dd/MM/yyyy"
+          ></el-date-picker>
+        </el-form-item>
+      </el-row>
+    </el-form>
+
+    <!-- page2 -->
+    <el-form
+      v-show="active == 1"
+      class="ncc1-page"
+      ref="formPage1"
+      :model="form"
+      :rules="rules"
+      label-width="150px"
+    >
+      <el-row class="nnc1-module-title">提交人的资料　Presentor’s Reference</el-row>
+      <el-row class="form-item-container">
+        <el-form-item label="提交人信息">
+          <el-radio-group
+            v-model="submitUser.userInfo"
+            @change="changeSubmitUser"
+          >
+            <el-radio label="defaultUser">默认</el-radio>
+            <el-radio label="selfUser">自定义</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          label="提交人名稱:"
+          prop="sUName"
+        >
+          <el-input
+            v-model="form.sUName"
+            placeholder="提交人的中文名称"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="提交人地址:"
+          prop="sUAddr"
+        >
+          <el-input
+            v-model="form.sUAddr"
+            placeholder="提交人的地址"
+          ></el-input>
+        </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item
+              label="提交人電話:"
+              prop="sUPhone"
+            >
+              <el-input
+                v-model="form.sUPhone"
+                placeholder="提交人電話"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item
+              label="提交人傳真:"
+              prop="sUFax"
+            >
+              <el-input
+                v-model="form.sUFax"
+                placeholder="提交人傳真"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item
+          label="提交人電郵:"
+          prop="sUEmail"
+        >
+          <el-input
+            v-model="form.sUEmail"
+            placeholder="提交人電郵"
+            type="email"
+          ></el-input>
+        </el-form-item>
+      </el-row>
+    </el-form>
+
+    <!-- page3 -->
+    <el-form
+      v-show="active == 2"
+      class="ncc1-page"
+      ref="formPage2"
+      :model="form"
+      :rules="rules"
+      label-width="150px"
+    >
+      <el-row class="nnc1-module-title">委任公司秘書／董事　Appointment of Company Secretary／Director</el-row>
+      <el-row class="form-item-container">
+        <el-row>
+          <el-col :span="8">
+            <el-form-item
+              label="中文姓名:"
+              prop="wNameCn"
+            >
+              <el-input
+                v-model="form.wNameCn"
+                placeholder="中文姓名"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item
+              label="英文姓名:"
+              prop="wSureName"
+            >
+              <el-input
+                v-model="form.wSureName"
+                placeholder="英文姓式"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item
+              label="英文姓名:"
+              prop="wOtherName"
+            >
+              <el-input
+                v-model="form.wOtherName"
+                placeholder="英文名字"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item
+          label="地址:"
+          prop="wAddr"
+        >
+          <el-input
+            v-model="form.wAddr"
+            placeholder="联络地址或证件地址"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="國家／地區:"
+          prop="wCountry"
+        >
+          <el-input
+            v-model="form.wCountry"
+            placeholder="國家／地區"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="证件类型:">
+          <el-radio-group
+            v-model="form.certificateType2"
+            @change="changeCertificateType2"
+          >
+            <el-radio label="wchinaId">中国身份证明</el-radio>
+            <el-radio label="whkId">香港身份证明</el-radio>
+            <el-radio label="wpassport">護照</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item
+          v-show="form.certificateType2 == 'wchinaId'"
+          label="大陆身份证明ID:"
+          prop="wChinaId"
+        >
+          <el-input
+            v-model="form.wChinaId"
+            placeholder="中国大陆身份证明"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          v-show="form.certificateType2 == 'whkId'"
+          prop="wHKId"
+        >
+          <el-input
+            v-model="form.wHKId"
+            placeholder="个人董事在香港身份证号码"
+          ></el-input>
+        </el-form-item>
+        <el-row v-show="form.certificateType2 == 'wpassport'">
+          <el-col :span="12">
+            <el-form-item
+              label="護照簽發國家:"
+              prop="wpsCountry"
+            >
+              <el-input
+                v-model="form.wpsCountry"
+                placeholder="護照簽發國家"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item
+              label="護照號碼:"
+              prop="wpsNumber"
+            >
+              <el-input
+                v-model="form.wpsNumber"
+                placeholder="護照號碼"
+              ></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-form-item
+          label="委任日期:"
+          prop="wDate"
+        >
+          <el-date-picker
+            type="date"
+            placeholder="选择日期"
+            v-model="form.wDate"
+            style="width: 100%;"
+            format="dd/MM/yyyy"
+            value-format="dd/MM/yyyy"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item
+          label="簽署日期:"
+          prop="signDate"
+        >
+          <el-date-picker
+            type="date"
+            placeholder="选择日期"
+            v-model="form.signDate"
+            style="width: 100%;"
+            format="dd/MM/yyyy"
+            value-format="dd/MM/yyyy"
+          ></el-date-picker>
+        </el-form-item>
+      </el-row>
+    </el-form>
+
+    <el-row class="btn-row">
+      <el-button
+        @click="prePage"
+        v-show="active !== 0"
+      >上一步</el-button>
+      <el-button
+        @click="nextPage"
+        v-show="active !== 2"
+      >下一步</el-button>
+      <el-button
+        @click="nextPage"
+        v-show="active == 2"
+      >提交</el-button>
     </el-row>
+  </el-row>
 </template>
 
 <script>
