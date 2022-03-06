@@ -547,11 +547,11 @@ export default {
     }
 
     const validateCName = (rule, value, cb) => {
-      const cnameReg = /\.(LIMITED|limited)$/
+      const cnameReg = /(LIMITED|limited)$/
       if (cnameReg.test(value)) {
         cb()
       } else {
-        cb(new Error('公司名称必须以 .LIMITED / .limited 结尾'))
+        cb(new Error('公司名称必须以 LIMITED / limited 结尾'))
       }
     }
 

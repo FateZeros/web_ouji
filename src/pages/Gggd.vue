@@ -1,14 +1,13 @@
 <template>
   <el-row>
     <el-row style="padding: 20px 0;">
-      <el-radio
+      <el-radio-group
         v-model="radio"
-        label="1"
-      >改股</el-radio>
-      <el-radio
-        v-model="radio"
-        label="2"
-      >改董</el-radio>
+        @change="handleRadioChange"
+      >
+        <el-radio label="1">改股</el-radio>
+        <el-radio label="2">改董</el-radio>
+      </el-radio-group>
     </el-row>
     <el-steps
       :active="active"
@@ -335,17 +334,48 @@
 import defaultInfo from '@/config/defaultInfo'
 import { ProduceWord } from '@/api'
 
+const validateCName = (rule, value, cb) => {
+  const cnameReg = /(LIMITED|limited)$/
+  if (cnameReg.test(value)) {
+    cb()
+  } else {
+    cb(new Error('公司名称必须以 LIMITED / limited 结尾'))
+  }
+}
+
+const defaultRules = {
+  cNameEn: [
+    { required: true, message: '请输入公司英文名稱' },
+    { validator: validateCName }
+  ],
+  cNameCn: [
+    { required: true, message: '请输入公司中文名稱' },
+    { validator: validateCName }
+  ],
+  tNameEn: [{ required: true, message: '请输入转让人中文名称' }],
+  tNameCn: [{ required: true, message: '请输入转让人英文名称' }],
+  tStockNum: [{ required: true, message: '请输入注册资金' }],
+  tAddr: [{ required: true, message: '请输入转让人地址' }],
+
+  tNameEn1: [{ required: true, message: '请输入受让人英文名称' }],
+  tNameCn1: [{ required: true, message: '请输入受让人中文名称' }],
+  tAddr1: [{ required: true, message: '请输入受让人地址' }],
+
+  stockT: [{ required: true, message: '请输入股份总份数' }],
+  stockPer: [{ required: true, message: '请输入每股金额' }],
+
+  busiNum: [{ required: true, message: '请输入商業登記證號碼' }],
+  cNum: [{ required: true, message: '请输入公司编号' }],
+
+  sUName: [{ required: true, message: '请输入提交人名稱' }],
+  sUAddr: [{ required: true, message: '请输入提交人地址' }],
+  sUPhone: [{ required: true, message: '请输入提交人電話' }],
+  sUFax: [{ required: true, message: '请输入提交人傳真' }],
+  sUEmail: [{ required: true, message: '请输入提交人電郵' }]
+}
+
 export default {
   data() {
-    const validateCName = (rule, value, cb) => {
-      const cnameReg = /\.(LIMITED|limited)$/
-      if (cnameReg.test(value)) {
-        cb()
-      } else {
-        cb(new Error('公司名称必须以 .LIMITED / .limited 结尾'))
-      }
-    }
-
     return {
       radio: '1',
 
@@ -384,41 +414,7 @@ export default {
         sUFax: defaultInfo.userFax,
         sUEmail: defaultInfo.userEmail
       },
-      rules: {
-        cNameEn: [
-          { required: true, message: '请输入公司英文名稱' },
-          { validator: validateCName }
-        ],
-        cNameCn: [
-          { required: true, message: '请输入公司中文名稱' },
-          { validator: validateCName }
-        ],
-        tNameEn: [{ required: true, message: '请输入转让人中文名称' }],
-        tNameCn: [{ required: true, message: '请输入转让人英文名称' }],
-        tStockNum: [{ required: true, message: '请输入注册资金' }],
-        tAddr: [{ required: true, message: '请输入转让人地址' }],
-
-        tNameEn1: [{ required: true, message: '请输入受让人英文名称' }],
-        tNameCn1: [{ required: true, message: '请输入受让人中文名称' }],
-        tAddr1: [{ required: true, message: '请输入受让人地址' }],
-
-        stockT: [{ required: true, message: '请输入股份总份数' }],
-        stockPer: [{ required: true, message: '请输入每股金额' }],
-
-        busiNum: [{ required: true, message: '请输入商業登記證號碼' }],
-        cNum: [{ required: true, message: '请输入公司编号' }],
-        czNameCn: [{ required: true, message: '请输入辭職人中文名' }],
-        czNameEn1: [{ required: true, message: '请输入辭職人英文名' }],
-        czNameEn2: [{ required: true, message: '请输入辭職人英文名' }],
-        chinaId: [{ required: true, message: '请输入chinaId' }],
-        czDate: [{ required: true, message: '请输入辭職日期' }],
-
-        sUName: [{ required: true, message: '请输入提交人名稱' }],
-        sUAddr: [{ required: true, message: '请输入提交人地址' }],
-        sUPhone: [{ required: true, message: '请输入提交人電話' }],
-        sUFax: [{ required: true, message: '请输入提交人傳真' }],
-        sUEmail: [{ required: true, message: '请输入提交人電郵' }]
-      },
+      rules: Object.assign({}, defaultRules),
       submitUser: {
         userInfo: 'defaultUser'
       }
@@ -447,10 +443,13 @@ export default {
             this.active = this.active + 1
           } else {
             const params = Object.assign({}, this.form)
-            const [dateD, dateM, dateY] = params.czDate.split('/')
-            params.dateY = dateY
-            params.dateM = dateM
-            params.dateD = dateD
+
+            if (params.czDate) {
+              const [dateD, dateM, dateY] = params.czDate.split('/')
+              params.dateY = dateY
+              params.dateM = dateM
+              params.dateD = dateD
+            }
             // console.log(params)
             this.produceWord('GGGD', params)
           }
@@ -495,7 +494,7 @@ export default {
           const url = `/output/${wordName}`
           const fileName = `${wordName}.docx`
           this.$alert(
-            `<a href=${url} download=${fileName}>${fileName}</a>`,
+            `<a href=${url} download=${fileName}>改股改董.docx</a>`,
             'WORD 下载，点击下载',
             {
               dangerouslyUseHTMLString: true
@@ -509,6 +508,23 @@ export default {
             duration: 2000
           })
         })
+    },
+
+    handleRadioChange(radio) {
+      console.log(this.rules, 11111)
+      // if (radio === '1') {
+      //   this.rules = Object.assign({}, defaultRules)
+      // } else if (radio === '2') {
+      //   const rulesCzObj = {
+      //     czNameCn: [{ required: true, message: '请输入辭職人中文名' }],
+      //     czNameEn1: [{ required: true, message: '请输入辭職人英文名' }],
+      //     czNameEn2: [{ required: true, message: '请输入辭職人英文名' }],
+      //     chinaId: [{ required: true, message: '请输入chinaId' }],
+      //     czDate: [{ required: true, message: '请输入辭職日期' }]
+      //   }
+      //   this.rules = Object.assign(this.rules, rulesCzObj)
+      // }
+      // console.log(this.rules, 12)
     }
   }
 }

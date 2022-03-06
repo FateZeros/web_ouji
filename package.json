@@ -10,7 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "dayjs": "^1.10.8",
     "element-ui": "^2.2.0",
+    "html2canvas": "^1.4.1",
     "vue": "^2.5.2",
     "vue-resource": "^1.4.0",
     "vue-router": "^3.0.1"

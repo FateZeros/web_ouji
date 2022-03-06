@@ -11,6 +11,9 @@ import GGGD from '@/pages/Gggd.vue'
 import YearCheckCN from '@/pages/YearCheck.cn.vue'
 // 年审(英文)
 import YearCheckEN from '@/pages/YearCheck.en.vue'
+// 数据上传
+import UploadData from '@/pages/upload-data'
+import WechatBill from '@/pages/wechat-bill'
 
 import Page404 from '@/components/404.vue'
 
@@ -45,6 +48,14 @@ export default new Router({
         {
           path: '/ns-en',
           component: YearCheckEN
+        },
+        {
+          path: '/upload-data',
+          component: UploadData
+        },
+        {
+          path: '/wechat-bill',
+          component: WechatBill
         }
       ]
     },

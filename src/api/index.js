@@ -26,3 +26,30 @@ export function ProduceWordZip(data) {
     data
   })
 }
+
+
+// 获取列表
+export function getExcelList() {
+  return makeRequest({
+    url: '/api/excel',
+    method: 'get'
+  })
+}
+
+// 上传 excel
+export function uploadExcel(data) {
+  return makeRequest({
+    url: '/api/upload_excel',
+    method: 'post',
+    data
+  })
+}
+
+// 下载 excel
+export function downloadDocs() {
+  return makeRequest({
+    url: '/api/download_docs',
+    method: 'post'
+  })
+}
+
