@@ -333,6 +333,7 @@
 <script>
 import defaultInfo from '@/config/defaultInfo'
 import { ProduceWord } from '@/api'
+import { baseURL } from '@/config/setting.js'
 
 const validateCName = (rule, value, cb) => {
   const cnameReg = /(LIMITED|limited)$/
@@ -491,7 +492,7 @@ export default {
       ProduceWord(data)
         .then(() => {
           this.forthStatus = 'success'
-          const url = `/output/${wordName}`
+          const url = `${baseURL}/output/${wordName}`
           const fileName = `${wordName}.docx`
           this.$alert(
             `<a href=${url} download=${fileName}>改股改董.docx</a>`,

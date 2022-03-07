@@ -534,6 +534,7 @@
 <script>
 import defaultInfo from '@/config/defaultInfo'
 import { ProduceWord } from '@/api'
+import { baseURL } from '@/config/setting.js'
 
 export default {
   data() {
@@ -852,7 +853,7 @@ export default {
       ProduceWord(data)
         .then(() => {
           this.forthStatus = 'success'
-          const url = `/output/${wordName}`
+          const url = `${baseURL}/output/${wordName}`
           const fileName = `${wordName}.docx`
           this.$alert(
             `<a href=${url} download=${fileName}>${fileName}</a>`,

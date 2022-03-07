@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const baseURL = 'localhost:6633'
+import { baseURL } from '@/config/setting.js'
 
 export function makeRequest({ url, method = 'get', data = {} }) {
   let reqUrl = url
