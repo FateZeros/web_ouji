@@ -16,6 +16,10 @@
       <el-upload
         accept=".xls,.xlsx"
         action="/"
+        class="upload-btn"
+        :show-file-list="false"
+        :http-request="handleCustomRequest"
+        :on-change="handleUploadFileChange"
       >
         <el-button style="margin-left: 12px;">上传 Excel</el-button>
       </el-upload>
@@ -95,7 +99,10 @@ export default {
     return {
       tableData: [],
       loading: false,
-      downloading: false
+      downloading: false,
+
+      baseURL: 'http://localhost:6633',
+      uploadFileList: []
     }
   },
 
@@ -126,21 +133,32 @@ export default {
         })
     },
 
-    handleCustomRequest(data) {
+    handleUploadFileChange(file) {
+      this.uploadFileList.push(file)
+    },
+
+    handleCustomRequest() {
       const formData = new FormData()
-      formData.append('files', data.file)
-      uploadExcel(formData)
-        .then(res => {
-          if (res.code === 200) {
-            this.$message.success('上传成功')
-            this.handleSearch()
-          } else {
-            this.$message.error('上传失败～')
-          }
-        })
-        .catch(() => {
-          this.$message.error('上传失败')
-        })
+      console.log(this.uploadFileList, 11212)
+      this.uploadFileList.forEach(item => {
+        formData.append('files', item.raw)
+      })
+      setTimeout(() => {
+        console.log(formData, 33333)
+      }, 200)
+      console.log(formData, 111)
+      // uploadExcel(formData)
+      //   .then(res => {
+      //     if (res.code === 200) {
+      //       this.$message.success('上传成功')
+      //       this.handleSearch()
+      //     } else {
+      //       this.$message.error('上传失败～')
+      //     }
+      //   })
+      //   .catch(() => {
+      //     this.$message.error('上传失败')
+      //   })
     },
 
     handleDownload() {
@@ -151,7 +169,8 @@ export default {
           if (res.code >= 200 && res.code < 400) {
             const aLink = document.createElement('a')
             aLink.download = `ND4.zip`
-            aLink.href = '/downloads/ND4.zip'
+            // aLink.href = '/downloads/ND4.zip'
+            aLink.href = `${baseURL}/downloads/ND4.zip`
             document.body.appendChild(aLink)
             aLink.click()
             document.body.removeChild(aLink)
@@ -180,5 +199,9 @@ export default {
 
 .table-wrap {
   margin-top: 20px;
+}
+
+.upload-btn {
+  display: inline-block;
 }
 </style>

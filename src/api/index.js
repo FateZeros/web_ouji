@@ -38,6 +38,7 @@ export function getExcelList() {
 
 // 上传 excel
 export function uploadExcel(data) {
+  console.log(data, 111)
   return makeRequest({
     url: '/api/upload_excel',
     method: 'post',
